@@ -1,0 +1,40 @@
+---
+import { IDS, MEETING_TIME, MEETING_LOCATION } from "../../data/site";
+---
+
+<section id={IDS.program} class="py-16 bg-base-100">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold">Our Program</h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="card bg-base-200">
+        <div class="card-body">
+          <h3 class="card-title">Weekly Meetings</h3>
+          <p>
+            {MEETING_TIME} at {MEETING_LOCATION}. Dens meet by grade with hands-on activities, games, and advancement.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200">
+        <div class="card-body">
+          <h3 class="card-title">Monthly Adventures</h3>
+          <p>
+            Hikes, campouts, service projects, and special outings across our community and local parks.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-200">
+        <div class="card-body">
+          <h3 class="card-title">Year-Round Fun</h3>
+          <p>
+            Summer picnics, Pinewood Derby, Blue & Gold Banquet, and community service events.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

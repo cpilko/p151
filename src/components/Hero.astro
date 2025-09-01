@@ -1,0 +1,22 @@
+---
+import { SITE_TITLE, MEETING_TIME, MEETING_LOCATION, BEASCOUT_URL, IDS, HERO_IMAGE } from "../data/site";
+---
+
+<div class="hero min-h-[80vh]" style={`background-image: url('${HERO_IMAGE}');`}>
+  <div class="hero-overlay bg-neutral/50"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-3xl">
+      <h1 class="mb-5 text-4xl sm:text-5xl font-extrabold leading-tight">
+        Welcome to Cub Scout Pack 151 - Broomall, PA
+      </h1>
+      <p class="mb-6 text-lg sm:text-xl">
+        Meeting {MEETING_TIME} at {MEETING_LOCATION}
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href={"#"+IDS.program} class="btn btn-primary">Visit Us</a>
+        <a href={BEASCOUT_URL} class="btn btn-secondary">Apply Online</a>
+        <a href={"#"+IDS.contact} class="btn">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>

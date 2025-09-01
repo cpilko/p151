@@ -1,0 +1,38 @@
+---
+import { IDS, GOOGLE_FORM_URL } from "../data/site";
+
+const hasForm = GOOGLE_FORM_URL && GOOGLE_FORM_URL !== '#';
+---
+
+<section id={IDS.contact} class="py-16 bg-base-100">
+  <div class="container mx-auto px-4 max-w-5xl">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold">Contact Us</h2>
+      <p class="mt-3 text-lg">Have questions? We’ll be glad to help you get started.</p>
+    </div>
+
+    <div class="card bg-base-200 shadow">
+      <div class="card-body">
+        {
+          hasForm ? (
+            <div class="w-full">
+              <iframe
+                src={GOOGLE_FORM_URL}
+                class="w-full h-[900px] rounded-lg border border-base-300"
+                loading="lazy"
+                title="Contact Form"
+              ></iframe>
+            </div>
+          ) : (
+            <div class="prose max-w-none">
+              <p><strong>Form coming soon.</strong> In the meantime, use the button below.</p>
+              <div class="mt-4">
+                <a href={GOOGLE_FORM_URL} class="btn btn-primary" aria-label="Open contact form placeholder">Open Contact Form</a>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

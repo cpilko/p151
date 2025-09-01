@@ -1,0 +1,38 @@
+---
+import { IDS, BEASCOUT_URL } from "../data/site";
+---
+
+<nav class="navbar bg-base-100 sticky top-0 z-50 shadow" role="navigation" aria-label="Primary">
+  <div class="container mx-auto">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a href={"#"+IDS.whoWeAre}>Who We Are</a></li>
+          <li><a href={"#"+IDS.whyJoin}>Why Join</a></li>
+          <li><a href={"#"+IDS.program}>Program</a></li>
+          <li><a href={"#"+IDS.getInvolved}>Get Involved</a></li>
+          <li><a href={"#"+IDS.contact}>Contact</a></li>
+        </ul>
+      </div>
+      <a href="/" class="btn btn-ghost text-xl gap-2">
+        <img src="/logo-pack151.png" alt="Cub Scout Pack 151 logo" class="h-8 w-8 hidden sm:block" loading="lazy" onerror="this.classList.add('hidden')" />
+        <span>Pack 151</span>
+      </a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href={"#"+IDS.whoWeAre}>Who We Are</a></li>
+        <li><a href={"#"+IDS.whyJoin}>Why Join</a></li>
+        <li><a href={"#"+IDS.program}>Program</a></li>
+        <li><a href={"#"+IDS.getInvolved}>Get Involved</a></li>
+        <li><a href={"#"+IDS.contact}>Contact</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <a href={BEASCOUT_URL} class="btn btn-primary" aria-label="Apply Online">Apply Online</a>
+    </div>
+  </div>
+</nav>

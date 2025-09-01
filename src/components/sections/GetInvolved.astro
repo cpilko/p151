@@ -1,0 +1,44 @@
+---
+import { IDS, BEASCOUT_URL, GOOGLE_FORM_URL } from "../../data/site";
+---
+
+<section id={IDS.getInvolved} class="py-16 bg-base-200">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="mb-10 text-center">
+      <h2 class="text-3xl font-bold">Get Involved</h2>
+      <p class="mt-3 text-lg">Ready to give your child the Cub Scout experience?</p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title">Visit Us</h3>
+          <p>Come to a Monday night meeting and see what we’re all about.</p>
+          <div class="card-actions justify-end">
+            <a href={"#"+IDS.program} class="btn btn-primary" aria-label="See our program">Plan a Visit</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title">Apply Online</h3>
+          <p>Join Pack 151 today through BeAScout.org.</p>
+          <div class="card-actions justify-end">
+            <a href={BEASCOUT_URL} class="btn btn-secondary" aria-label="Apply online via BeAScout" rel="noopener">BeAScout</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title">Contact Us</h3>
+          <p>Fill out the form below and a Pack leader will be in touch.</p>
+          <div class="card-actions justify-end">
+            <a href={GOOGLE_FORM_URL} class="btn" aria-label="Open contact form" rel="noopener">Open Form</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
