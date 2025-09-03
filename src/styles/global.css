@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "daisyui"{
+@plugin "daisyui"{
   themes: p151-bumblebee;
 }
 @plugin "daisyui/theme" {

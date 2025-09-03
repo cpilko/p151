@@ -5,7 +5,7 @@ export const MEETING_TIME = '7 PM Mondays';
 export const MEETING_LOCATION = 'Marple Presbyterian Church';
 
 export const BEASCOUT_URL = '#'; // TODO: replace with BeAScout unit URL
-export const GOOGLE_FORM_URL = '#'; // TODO: replace with Google Form URL
+export const GOOGLE_FORM_URL = 'https://forms.gle/AdFmrX8vEHyTvVFS7'; // TODO: replace with Google Form URL
 
 // Temporary placeholder images (Picsum). Replace with public asset paths later.
 export const LOGO_IMAGE = '/CubScout_4K-Logo-CSBC.png';

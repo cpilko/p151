@@ -1,40 +1,55 @@
 ---
 import { IDS, MEETING_TIME, MEETING_LOCATION } from "../../data/site";
+
+// Load Program content from Markdown/YAML frontmatter
+const [mod] = await Astro.glob("../../data/program.md");
+const fm = (mod?.frontmatter ?? {}) as {
+  title?: string;
+  cards?: { title: string; text: string }[];
+};
+
+function tpl(s: string): string {
+  return (s ?? "")
+    .replaceAll("{{MEETING_TIME}}", MEETING_TIME)
+    .replaceAll("{{MEETING_LOCATION}}", MEETING_LOCATION);
+}
+
+let cards =
+  (fm.cards ?? []).map((c) => ({ ...c, text: tpl(c.text) }));
+
+if (cards.length === 0) {
+  cards = [
+    {
+      title: "Weekly Meetings",
+      text: tpl("{{MEETING_TIME}} at {{MEETING_LOCATION}}. Dens meet by grade with hands-on activities, games, and advancement."),
+    },
+    {
+      title: "Monthly Adventures",
+      text: "Hikes, campouts, service projects, and special outings across our community and local parks.",
+    },
+    {
+      title: "Year-Round Fun",
+      text: "Summer picnics, Pinewood Derby, Blue & Gold Banquet, and community service events.",
+    },
+  ];
+}
 ---
 
 <section id={IDS.program} class="py-16 bg-base-100">
   <div class="container mx-auto px-4 max-w-6xl">
     <div class="mb-8">
-      <h2 class="text-3xl font-bold">Our Program</h2>
+      <h2 class="text-3xl font-bold text-center">{fm.title ?? "Our Program"}</h2>
     </div>
 
     <div class="grid gap-6 md:grid-cols-3">
-      <div class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Weekly Meetings</h3>
-          <p>
-            {MEETING_TIME} at {MEETING_LOCATION}. Dens meet by grade with hands-on activities, games, and advancement.
-          </p>
+      {cards.map((card) => (
+        <div class="card bg-base-200">
+          <div class="card-body">
+            <h3 class="card-title">{card.title}</h3>
+            <p set:html={card.text}></p>
+          </div>
         </div>
-      </div>
-
-      <div class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Monthly Adventures</h3>
-          <p>
-            Hikes, campouts, service projects, and special outings across our community and local parks.
-          </p>
-        </div>
-      </div>
-
-      <div class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Year-Round Fun</h3>
-          <p>
-            Summer picnics, Pinewood Derby, Blue & Gold Banquet, and community service events.
-          </p>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>

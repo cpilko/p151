@@ -1,36 +1,53 @@
 ---
 import { IDS, BEASCOUT_URL, LOGO_IMAGE } from "../data/site";
+
+// Load nav content from Markdown
+const [navMod] = await Astro.glob("../data/nav.md");
+const fm = (navMod?.frontmatter ?? {}) as {
+  brand?: string;
+  applyText?: string;
+  menu?: { id: string; label: string }[];
+};
+
+const menu = (fm.menu ?? [
+  { id: "whoWeAre", label: "Who We Are" },
+  { id: "whyJoin", label: "Why Join" },
+  { id: "program", label: "Program" },
+  { id: "getInvolved", label: "Get Involved" },
+  { id: "contact", label: "Contact" },
+]);
+
+const hrefFor = (id: string) => {
+  const anchor = (IDS as any)?.[id] ?? id;
+  return "#" + anchor;
+};
 ---
 
 <nav class="navbar bg-base-100 sticky top-0 z-50 shadow" role="navigation" aria-label="Primary">
-    <div class="navbar-start">
-      <div class="dropdown">
-        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden" aria-label="Open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><a href={"#"+IDS.whoWeAre}>Who We Are</a></li>
-          <li><a href={"#"+IDS.whyJoin}>Why Join</a></li>
-          <li><a href={"#"+IDS.program}>Program</a></li>
-          <li><a href={"#"+IDS.getInvolved}>Get Involved</a></li>
-          <li><a href={"#"+IDS.contact}>Contact</a></li>
-        </ul>
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </div>
-      <a href="/" class="btn btn-ghost text-xl gap-2">
-        <img src={LOGO_IMAGE} alt="Cub Scout Pack 151 logo" class="h-8 w-8 hidden sm:block" loading="lazy" onerror="this.classList.add('hidden')" />
-        <span>Pack 151</span>
-      </a>
-    </div>
-    <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1">
-        <li><a href={"#"+IDS.whoWeAre}>Who We Are</a></li>
-        <li><a href={"#"+IDS.whyJoin}>Why Join</a></li>
-        <li><a href={"#"+IDS.program}>Program</a></li>
-        <li><a href={"#"+IDS.getInvolved}>Get Involved</a></li>
-        <li><a href={"#"+IDS.contact}>Contact</a></li>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        {menu.map((item) => (
+          <li><a href={hrefFor(item.id)}>{item.label}</a></li>
+        ))}
       </ul>
     </div>
-    <div class="navbar-end">
-      <a href={BEASCOUT_URL} class="btn btn-primary" aria-label="Apply Online">Apply Online</a>
-    </div>
+    <a href="/" class="btn btn-ghost text-xl gap-2">
+      <img src={LOGO_IMAGE} alt="Cub Scout Pack 151 logo" class="h-8 w-8 hidden sm:block" loading="lazy" onerror="this.classList.add('hidden')" />
+      <span>{fm.brand ?? "Pack 151"}</span>
+    </a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      {menu.map((item) => (
+        <li><a href={hrefFor(item.id)}>{item.label}</a></li>
+      ))}
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a href={BEASCOUT_URL} class="btn btn-secondary" aria-label="Apply Online">{fm.applyText ?? "Apply Online"}</a>
+  </div>
 </nav>

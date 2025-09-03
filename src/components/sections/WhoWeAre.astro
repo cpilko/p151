@@ -1,31 +1,24 @@
 ---
 import { IDS, GALLERY_1, GALLERY_2 } from "../../data/site";
+
+// Load "Who We Are" content from Markdown
+const [{ Content, frontmatter: fm }] = await Astro.glob("../../data/who-we-are.md");
 ---
 
 <section id={IDS.whoWeAre} class="py-16 bg-base-200">
   <div class="container mx-auto px-4 max-w-5xl">
     <div class="mb-8">
-      <h2 class="text-3xl font-bold">Who We Are</h2>
-      <p class="mt-4 text-lg leading-relaxed">
-        Cub Scout Pack 151 is a family pack open to all kids Kindergarten through Fifth Grade. We are proud
-        to welcome youth of every background and their families into our Scouting adventure.
-      </p>
-      <p class="mt-4 text-lg leading-relaxed">
-        We meet on Monday nights at 7:00 PM at Marple Presbyterian Church in Broomall and host monthly hikes,
-        weekend outings, and family events year-round.
-      </p>
-      <p class="mt-4 text-lg leading-relaxed">
-        For over 60 years, Pack 151 has been building confidence, leadership, and character in young people
-        across Marple Newtown. Many of our Scouts go on to join Troop 151 right here in Broomall, continuing
-        their growth toward Eagle Scout.
-      </p>
+      <h2 class="text-3xl font-bold text-center">{fm?.title ?? "Who We Are"}</h2>
+      <div class="prose max-w-none mt-4 whitespace-pre-line">
+        <Content />
+      </div>
     </div>
     <div class="mt-8 grid gap-4 sm:grid-cols-2">
       <figure class="card bg-base-100 shadow">
-        <img src={GALLERY_1} alt="Cub Scouts hiking together on a local trail" class="rounded-t-xl object-cover w-full h-56" loading="lazy" />
+        <img src={GALLERY_1} alt={fm?.gallery?.[0]?.alt ?? "Cub Scouts hiking together on a local trail"} class="rounded-t-xl object-cover w-full h-56" loading="lazy" />
       </figure>
       <figure class="card bg-base-100 shadow">
-        <img src={GALLERY_2} alt="Families around a campfire during a Pack outing" class="rounded-t-xl object-cover w-full h-56" loading="lazy" />
+        <img src={GALLERY_2} alt={fm?.gallery?.[1]?.alt ?? "Families around a campfire during a Pack outing"} class="rounded-t-xl object-cover w-full h-56" loading="lazy" />
       </figure>
     </div>
   </div>

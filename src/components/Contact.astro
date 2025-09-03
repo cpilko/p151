@@ -1,14 +1,21 @@
 ---
 import { IDS, GOOGLE_FORM_URL } from "../data/site";
 
-const hasForm = GOOGLE_FORM_URL && GOOGLE_FORM_URL !== '#';
+const hasForm = typeof GOOGLE_FORM_URL === "string" && GOOGLE_FORM_URL !== "#";
+
+// Load content from Markdown
+const [mod] = await Astro.glob("../data/contact.md");
+const fm = (mod?.frontmatter ?? {}) as {
+  title?: string;
+  intro?: string;
+};
 ---
 
 <section id={IDS.contact} class="py-16 bg-base-100">
   <div class="container mx-auto px-4 max-w-5xl">
     <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold">Contact Us</h2>
-      <p class="mt-3 text-lg">Have questions? We’ll be glad to help you get started.</p>
+      <h2 class="text-3xl font-bold">{fm.title ?? "Contact Us"}</h2>
+      {fm.intro && <p class="mt-3 text-lg">{fm.intro}</p>}
     </div>
 
     <div class="card bg-base-200 shadow">
@@ -27,7 +34,7 @@ const hasForm = GOOGLE_FORM_URL && GOOGLE_FORM_URL !== '#';
             <div class="prose max-w-none">
               <p><strong>Form coming soon.</strong> In the meantime, use the button below.</p>
               <div class="mt-4">
-                <a href={GOOGLE_FORM_URL} class="btn btn-primary" aria-label="Open contact form placeholder">Open Contact Form</a>
+                <a href={GOOGLE_FORM_URL} class="btn" aria-label="Open contact form placeholder">Open Contact Form</a>
               </div>
             </div>
           )

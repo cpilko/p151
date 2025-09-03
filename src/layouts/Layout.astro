@@ -1,6 +1,14 @@
 ---
 import "../styles/global.css";
-import { SITE_TITLE, SITE_DESC } from "../data/site";
+import { SITE_TITLE as FALLBACK_TITLE, SITE_DESC as FALLBACK_DESC } from "../data/site";
+
+// Load site meta from Markdown
+const [siteMod] = await Astro.glob("../data/site.md");
+const site = (siteMod?.frontmatter ?? {}) as {
+  title?: string;
+  description?: string;
+  themeColor?: string;
+};
 ---
 
 <!doctype html>
@@ -10,27 +18,27 @@ import { SITE_TITLE, SITE_DESC } from "../data/site";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{SITE_TITLE}</title>
-    <meta name="description" content={SITE_DESC} />
-    <meta name="theme-color" content="#e0a82e" />
+    <title>{site.title ?? FALLBACK_TITLE}</title>
+    <meta name="description" content={site.description ?? FALLBACK_DESC} />
+    <meta name="theme-color" content={site.themeColor ?? "#e0a82e"} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={SITE_TITLE} />
-    <meta property="og:description" content={SITE_DESC} />
+    <meta property="og:title" content={site.title ?? FALLBACK_TITLE} />
+    <meta property="og:description" content={site.description ?? FALLBACK_DESC} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={SITE_TITLE} />
-    <meta name="twitter:description" content={SITE_DESC} />
+    <meta name="twitter:title" content={site.title ?? FALLBACK_TITLE} />
+    <meta name="twitter:description" content={site.description ?? FALLBACK_DESC} />
 
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "Cub Scout Pack 151",
-        description: SITE_DESC,
+        name: site.title ?? FALLBACK_TITLE,
+        description: site.description ?? FALLBACK_DESC,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Broomall",

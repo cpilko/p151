@@ -1,51 +1,35 @@
 ---
 import { IDS } from "../../data/site";
+
+// Load Why Join content from Markdown
+const [{ Content, frontmatter: fm }] = await Astro.glob("../../data/why-join.md");
+const items = (fm?.items ?? []) as { title: string; text: string; colSpan?: number }[];
 ---
 
 <section id={IDS.whyJoin} class="py-16">
   <div class="container mx-auto px-4 max-w-6xl">
     <div class="mb-8">
-      <h2 class="text-3xl font-bold">Why Join Cub Scouts?</h2>
-      <p class="mt-4 text-lg">
-        Scouting is more than a weekly meeting — it’s an experience that lasts a lifetime. At Pack 151, your child will:
-      </p>
+      <h2 class="text-3xl font-bold text-center">{fm?.title ?? "Why Join Cub Scouts?"}</h2>
+      {fm?.intro && (
+        <p class="mt-4 text-lg">
+          {fm.intro}
+        </p>
+      )}
     </div>
 
     <ul class="grid gap-4 md:grid-cols-2">
-      <li class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Get Outdoors</h3>
-          <p>Hike every month, camp under the stars, and explore nature.</p>
-        </div>
-      </li>
-      <li class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Earn Achievements</h3>
-          <p>Recognize effort, progress, and personal growth.</p>
-        </div>
-      </li>
-      <li class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Make Friends</h3>
-          <p>Build strong friendships across grades and schools.</p>
-        </div>
-      </li>
-      <li class="card bg-base-200">
-        <div class="card-body">
-          <h3 class="card-title">Try New Things</h3>
-          <p>STEM, crafts, service projects, games, and skits.</p>
-        </div>
-      </li>
-      <li class="card bg-base-200 md:col-span-2">
-        <div class="card-body">
-          <h3 class="card-title">Grow Together</h3>
-          <p>Families are part of the fun, every step of the way.</p>
-        </div>
-      </li>
+      {items.map((it) => (
+        <li class={`card bg-base-200 ${it.colSpan === 2 ? "md:col-span-2" : ""}`}>
+          <div class="card-body">
+            <h3 class="card-title">{it.title}</h3>
+            <p>{it.text}</p>
+          </div>
+        </li>
+      ))}
     </ul>
 
-    <p class="mt-8 text-lg">
-      Scouting teaches lessons that sports and school alone can’t: resilience, kindness, responsibility, and service.
-    </p>
+    <div class="mt-8 text-lg prose max-w-none">
+      <Content />
+    </div>
   </div>
 </section>
