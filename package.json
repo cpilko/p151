@@ -12,5 +12,6 @@
     "astro": "^5.13.5",
     "daisyui": "^5.0.54",
     "tailwindcss": "^4.1.12"
-  }
+  },
+ "license": "MIT"
 }
