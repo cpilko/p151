@@ -8,5 +8,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://p151.github.io',
+  site: 'https://cpilko.github.io/p151/',
 });
