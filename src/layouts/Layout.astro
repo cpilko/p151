@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { SITE_TITLE as FALLBACK_TITLE, SITE_DESC as FALLBACK_DESC } from "../data/site";
+import { SITE_TITLE as FALLBACK_TITLE, SITE_DESC as FALLBACK_DESC, SITE_URL, OG_IMAGE, OG_IMAGE_ALT, HERO_IMAGE, LOGO_IMAGE } from "../data/site";
 
 // Load site meta from Markdown
 const siteModules = await import.meta.glob("../data/site.md", { eager: true });
@@ -10,6 +10,13 @@ const site = (siteMod?.frontmatter ?? {}) as {
   description?: string;
   themeColor?: string;
 };
+
+// SEO computed values
+const url = String(SITE_URL ?? '').trim();
+const hasSiteUrl = url.length > 0 && url !== '#';
+const canonicalUrl = hasSiteUrl ? url : undefined;
+const ogImageUrl = hasSiteUrl ? new URL(OG_IMAGE, url).toString() : OG_IMAGE;
+const logoUrl = hasSiteUrl ? new URL(LOGO_IMAGE, url).toString() : LOGO_IMAGE;
 ---
 
 <!doctype html>
@@ -21,21 +28,30 @@ const site = (siteMod?.frontmatter ?? {}) as {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href={HERO_IMAGE} />
     <meta name="generator" content={Astro.generator} />
     <title>{site.title ?? FALLBACK_TITLE}</title>
     <meta name="description" content={site.description ?? FALLBACK_DESC} />
     <meta name="theme-color" content={site.themeColor ?? "#e0a82e"} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={site.title ?? FALLBACK_TITLE} />
     <meta property="og:description" content={site.description ?? FALLBACK_DESC} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={site.title ?? FALLBACK_TITLE} />
     <meta name="twitter:description" content={site.description ?? FALLBACK_DESC} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
 
     <script type="application/ld+json">
       {JSON.stringify({
@@ -43,6 +59,9 @@ const site = (siteMod?.frontmatter ?? {}) as {
         "@type": "Organization",
         name: site.title ?? FALLBACK_TITLE,
         description: site.description ?? FALLBACK_DESC,
+        url: canonicalUrl,
+        logo: logoUrl,
+        sameAs: ["https://facebook.com/Pack151"],
         address: {
           "@type": "PostalAddress",
           addressLocality: "Broomall",

@@ -1,5 +1,5 @@
 ---
-title: "Cub Scout Pack 151 - Broomall, PA"
-description: "Cub Scout Pack 151 is a family pack for Kindergarten through 5th Grade in Broomall, PA. Building confidence, leadership, and character for over 60 years with weekly meetings, monthly hikes, and year-round family events."
+title: "Join Cub Scouts in Broomall, PA | Pack 151 (K–5 Family Pack)"
+description: "Pack 151 is a Cub Scout family pack serving Broomall and Marple Newtown for K–5. Monday 7 PM at Marple Presbyterian Church. Outdoor adventures, STEM, service, year-round fun."
 themeColor: "#e0a82e"
 ---

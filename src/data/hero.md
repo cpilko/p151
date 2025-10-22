@@ -1,9 +1,9 @@
 ---
 supertitle: "Welcome to"
-title: "Cub Scout Pack 151 Broomall, PA"
-subtitle: "We meet at 7 PM on Mondays at Marple Presbyterian Church"
+title: "Cub Scout Pack 151 in Broomall, PA"
+subtitle: "A K–5 family Cub Scout pack serving Broomall and Marple Newtown. We meet Mondays at 7 PM at Marple Presbyterian Church."
 buttons:
-  visit: "Visit Us"
-  apply: "Apply Online"
-  contact: "Contact"
+  visit: "Plan a Monday Visit"
+  apply: "Join on BeAScout"
+  contact: "Ask a Question"
 ---

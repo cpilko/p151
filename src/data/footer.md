@@ -1,4 +1,4 @@
 ---
-location: "Broomall, PA • Marple Presbyterian Church"
+location: "Broomall, PA"
 backToTop: "Back to top"
 ---
