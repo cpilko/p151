@@ -2,7 +2,8 @@
 import { BEASCOUT_URL, IDS, HERO_IMAGE } from "../data/site";
 
 // Load hero content from Markdown
-const [heroMod] = await Astro.glob("../data/hero.md");
+const heroModules = await import.meta.glob("../data/hero.md", { eager: true });
+const [heroMod] = Object.values(heroModules) as any[];
 const fm = (heroMod?.frontmatter ?? {}) as {
   title?: string;
   subtitle?: string;

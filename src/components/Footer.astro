@@ -3,7 +3,8 @@ import { SITE_TITLE } from "../data/site";
 const year = new Date().getFullYear();
 
 // Load footer content from Markdown
-const [mod] = await Astro.glob("../data/footer.md");
+const modules = await import.meta.glob("../data/footer.md", { eager: true });
+const [mod] = Object.values(modules) as any[];
 const fm = (mod?.frontmatter ?? {}) as {
   location?: string;
   backToTop?: string;

@@ -2,7 +2,8 @@
 import { IDS } from "../../data/site";
 
 // Load Why Join content from Markdown
-const [{ Content, frontmatter: fm }] = await Astro.glob("../../data/why-join.md");
+const modules = await import.meta.glob("../../data/why-join.md", { eager: true });
+const [{ Content, frontmatter: fm }] = Object.values(modules) as any[];
 const items = (fm?.items ?? []) as { title: string; text: string; colSpan?: number }[];
 ---
 

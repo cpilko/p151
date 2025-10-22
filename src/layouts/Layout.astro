@@ -3,7 +3,8 @@ import "../styles/global.css";
 import { SITE_TITLE as FALLBACK_TITLE, SITE_DESC as FALLBACK_DESC } from "../data/site";
 
 // Load site meta from Markdown
-const [siteMod] = await Astro.glob("../data/site.md");
+const siteModules = await import.meta.glob("../data/site.md", { eager: true });
+const [siteMod] = Object.values(siteModules) as any[];
 const site = (siteMod?.frontmatter ?? {}) as {
   title?: string;
   description?: string;
@@ -17,6 +18,9 @@ const site = (siteMod?.frontmatter ?? {}) as {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
     <meta name="generator" content={Astro.generator} />
     <title>{site.title ?? FALLBACK_TITLE}</title>
     <meta name="description" content={site.description ?? FALLBACK_DESC} />

@@ -2,7 +2,8 @@
 import { IDS, BEASCOUT_URL, GOOGLE_FORM_URL } from "../../data/site";
 
 // Load content from Markdown
-const [mod] = await Astro.glob("../../data/get-involved.md");
+const modules = await import.meta.glob("../../data/get-involved.md", { eager: true });
+const [mod] = Object.values(modules) as any[];
 const fm = (mod?.frontmatter ?? {}) as {
   title?: string;
   intro?: string;

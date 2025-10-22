@@ -4,7 +4,8 @@ import { IDS, GOOGLE_FORM_URL } from "../data/site";
 const hasForm = typeof GOOGLE_FORM_URL === "string" && GOOGLE_FORM_URL !== "#";
 
 // Load content from Markdown
-const [mod] = await Astro.glob("../data/contact.md");
+const modules = await import.meta.glob("../data/contact.md", { eager: true });
+const [mod] = Object.values(modules) as any[];
 const fm = (mod?.frontmatter ?? {}) as {
   title?: string;
   intro?: string;

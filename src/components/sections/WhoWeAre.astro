@@ -2,7 +2,8 @@
 import { IDS, GALLERY_1, GALLERY_2 } from "../../data/site";
 
 // Load "Who We Are" content from Markdown
-const [{ Content, frontmatter: fm }] = await Astro.glob("../../data/who-we-are.md");
+const modules = await import.meta.glob("../../data/who-we-are.md", { eager: true });
+const [{ Content, frontmatter: fm }] = Object.values(modules) as any[];
 ---
 
 <section id={IDS.whoWeAre} class="py-16 bg-base-200">

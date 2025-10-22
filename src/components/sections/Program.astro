@@ -2,7 +2,8 @@
 import { IDS, MEETING_TIME, MEETING_LOCATION } from "../../data/site";
 
 // Load Program content from Markdown/YAML frontmatter
-const [mod] = await Astro.glob("../../data/program.md");
+const modules = await import.meta.glob("../../data/program.md", { eager: true });
+const [mod] = Object.values(modules) as any[];
 const fm = (mod?.frontmatter ?? {}) as {
   title?: string;
   cards?: { title: string; text: string }[];

@@ -2,7 +2,8 @@
 import { IDS, BEASCOUT_URL, LOGO_IMAGE } from "../data/site";
 
 // Load nav content from Markdown
-const [navMod] = await Astro.glob("../data/nav.md");
+const navModules = await import.meta.glob("../data/nav.md", { eager: true });
+const [navMod] = Object.values(navModules) as any[];
 const fm = (navMod?.frontmatter ?? {}) as {
   brand?: string;
   applyText?: string;
