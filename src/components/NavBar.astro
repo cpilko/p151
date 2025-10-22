@@ -36,7 +36,7 @@ const hrefFor = (id: string) => {
         ))}
       </ul>
     </div>
-    <a href="/" class="btn btn-ghost text-xl gap-2">
+    <a href={import.meta.env.BASE_URL} class="btn btn-ghost text-xl gap-2">
       <img src={LOGO_IMAGE} alt="Cub Scout Pack 151 logo" class="h-8 w-8 hidden sm:block" loading="lazy" onerror="this.classList.add('hidden')" />
       <span>{fm.brand ?? "Pack 151"}</span>
     </a>
